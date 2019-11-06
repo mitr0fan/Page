@@ -1,0 +1,37 @@
+<mat-button-toggle-group>
+    <mat-button-toggle id="reg" #reg (click)="changeMode(reg)">Регистрация</mat-button-toggle>
+    <mat-button-toggle id="enter" #enter (click)="changeMode(enter)">Вход</mat-button-toggle>
+</mat-button-toggle-group>
+<form class="form" [formGroup]="options" *ngIf="mode===true">
+    <p class="mat-form-field">Регистрация</p>
+    
+    <mat-form-field appearance="outline">
+        <input matInput placeholder="Jonh" formControlName="login">
+        <mat-label>Введите Логин</mat-label>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <input type="password" matInput placeholder="Password" formControlName="password">
+        <mat-label>Введите Пароль</mat-label>
+        <mat-hint>*Не менее 6 символов</mat-hint>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addUser()" disabled="false">Зарегистрировать</button>
+</form>
+
+<div class="form" *ngIf="mode===false">
+    <p class="mat-form-field">Вход</p>
+    
+    <mat-form-field appearance="outline">
+        <input matInput placeholder="Jonh" #log>
+        <mat-label>Введите Логин</mat-label>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <input type="password" matInput placeholder="Password" #pas>
+        <mat-label>Введите Пароль</mat-label>
+    </mat-form-field>
+    
+    <button mat-raised-button color="primary" [routerLink]="signIn(log, pas)"
+     (click)="openSnackBar('sign', log, pas)">Войти</button>
+</div>
